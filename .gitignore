@@ -1,14 +1,28 @@
-# Docker volumes
+# =========================
+# DOCKER
+# =========================
 docker/mysql/data/
+*.sock
 
-# Laravel stuff
+# =========================
+# LARAVEL APP
+# =========================
 src/laravel-app/vendor/
 src/laravel-app/node_modules/
 src/laravel-app/storage/
+src/laravel-app/bootstrap/cache/
 src/laravel-app/.env
 
-# System files
+# =========================
+# SYSTEM / IDE FILES
+# =========================
 .env
 .idea/
 .vscode/
 .DS_Store
+Thumbs.db
+
+# =========================
+# LOGS / CACHE
+# =========================
+*.log
