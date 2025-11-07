@@ -1,0 +1,14 @@
+# Docker volumes
+docker/mysql/data/
+
+# Laravel stuff
+src/laravel-app/vendor/
+src/laravel-app/node_modules/
+src/laravel-app/storage/
+src/laravel-app/.env
+
+# System files
+.env
+.idea/
+.vscode/
+.DS_Store
