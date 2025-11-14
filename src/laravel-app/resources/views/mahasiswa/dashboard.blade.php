@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mahasiswa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5 border border-primary">
+        <h2>Selamat Datang, {{ Auth::user()->name }}</h2>
+        <p>Anda login sebagai <strong>Mahasiswa</strong>.</p>
+
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+            class="btn btn-danger mt-3">Logout</a>
+
+        <form id="logout-form" method="POST" action="{{ route('logout') }}">
+            @csrf
+        </form>
+    </div>
+</body>
+
+</html>

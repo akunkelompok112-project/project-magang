@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'nim',      // untuk mahasiswa
+        'nip',      // untuk dosen
+        'is_active',
+        'role_id', // role
     ];
 
     /**
@@ -38,11 +42,41 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'is_active' => 'boolean',
+    ];
+
+
+    /**
+     * Relasi: user memiliki satu role
+     */
+    public function role()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Helper: cek apakah user ini mahasiswa
+     */
+    public function isMahasiswa()
+    {
+        return $this->role && strtolower($this->role->name) === 'mahasiswa';
+    }
+
+    /**
+     * Helper: cek apakah user ini dosen
+     */
+    public function isDosen()
+    {
+        return $this->role && strtolower($this->role->name) === 'dosen';
+    }
+    /**
+     * Helper: cek apakah user ini dosen
+     */
+    public function isAdmin()
+    {
+        return $this->role && strtolower($this->role->name) === 'admin';
     }
 }
