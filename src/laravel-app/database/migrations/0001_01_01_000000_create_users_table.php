@@ -11,14 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // 1. create_roles_table.php
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('display_name')->nullable();
+            $table->timestamps();
+        });
+
+        // 2. create_users_table.php
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('nim')->nullable()->unique(); // untuk mahasiswa
+            $table->string('nip')->nullable()->unique(); // untuk dosen
+            $table->boolean('is_active')->default(true); // status akun aktif
             $table->rememberToken();
             $table->timestamps();
+            // Jika roles sudah ada, bisa langsung tambahkan role_id
+            $table->foreignId('role_id')->nullable()->constrained('roles')->nullOnDelete();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -42,8 +56,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 };
