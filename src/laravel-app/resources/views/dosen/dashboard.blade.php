@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="container mt-5 border border-primary">
+    <div class="container mt-5 border border-primary ">
         <h2>Selamat Datang, {{ Auth::user()->name }}</h2>
         <p>Anda login sebagai <strong>Dosen</strong>.</p>
 

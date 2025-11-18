@@ -4,24 +4,39 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
+// Route ke halaman utama
 Route::get('/', function () {
-    if (Auth::check()) {
-        // Jika sudah login, arahkan sesuai role
-        /** @var User $user */
-        $user = Auth::user();
-        if ($user->isMahasiswa()) {
-            return redirect()->route('mahasiswa.dashboard');
-        } elseif ($user->isDosen()) {
-            return redirect()->route('dosen.dashboard');
-        } else {
-            // Arahkan ke rute 'home' sebagai fallback jika role tidak cocok dengan if/elseif di atas
-            return redirect()->route('home');
-        }
-    }
-    // Jika belum login, arahkan ke halaman login
-    return redirect()->route('login');
+    return view('home.home'); // memanggil resources/views/home.blade.php
 });
+
+// Route ke halaman profile
+Route::get('/profile', function () {
+    return view('profile.profile'); // memanggil resources/views/profile.blade.php
+});
+
+// Route ke halaman settings
+Route::get('/settings', function () {
+    return view('settings.settings'); // memanggil resources/views/settings.blade.php
+});
+
+
+// Route::get('/', function () {
+//     if (Auth::check()) {
+//         // Jika sudah login, arahkan sesuai role
+//         /** @var User $user */
+//         $user = Auth::user();
+//         if ($user->isMahasiswa()) {
+//             return redirect()->route('mahasiswa.dashboard');
+//         } elseif ($user->isDosen()) {
+//             return redirect()->route('dosen.dashboard');
+//         } else {
+//             // Arahkan ke rute 'home' sebagai fallback jika role tidak cocok dengan if/elseif di atas
+//             return redirect()->route('home');
+//         }
+//     }
+//     // Jika belum login, arahkan ke halaman login
+//     return redirect()->route('login');
+// });
 
 
 // --- RUTING AUTENTIKASI ---
@@ -39,6 +54,10 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout')
     ->middleware('auth');
+
+Route::get('/absen', function () {
+    return view("absen.absen");
+})->middleware('auth');
 
 
 // Grup rute yang HANYA bisa diakses oleh pengguna dengan peran 'dosen'

@@ -73,10 +73,12 @@ exit
 ---
 
 ## 🔐 Kredensial database (default)
-- Database: magang_db
-- User: magang_user
-- Password: magang_pass
-- Root password: root
+- DB_CONNECTION=mysql
+- DB_HOST=magang-mysql
+- DB_PORT=3306
+- DB_DATABASE=magang_db
+- DB_USERNAME=magang_user
+- DB_PASSWORD=magang_pass
 
 Nilai ini disetel di file `.env` pada root dan di `src/laravel-app/.env`.
 
